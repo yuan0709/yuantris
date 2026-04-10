@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>Tetris Battle PRO - Player vs AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>TETRIS BATTLE</h1>
+        <div class="main-layout">
+            <div class="player-section">
+                <h3>PLAYER</h3>
+                <div class="game-wrapper">
+                    <div class="side-boxes">
+                        <div class="box">HOLD<canvas id="hold-canvas" width="90" height="90"></canvas></div>
+                        <div class="box">NEXT<canvas id="next-canvas" width="90" height="270"></canvas></div>
+                    </div>
+                    <div class="canvas-container">
+                        <div id="player-garbage-bar" class="garbage-bar"></div>
+                        <canvas id="tetris" width="300" height="600"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="side-panel">
+                <div class="control-group">
+                    <label>AI 難度: <span id="ai-lv-val">5</span></label>
+                    <input type="range" id="ai-level" min="0" max="10" value="5">
+                </div>
+                <div class="control-group">
+                    <label>DAS (延遲): <span id="das-val">150</span>ms</label>
+                    <input type="range" id="das-range" min="50" max="300" value="150">
+                </div>
+                <div class="control-group">
+                    <label>ARR (速度): <span id="arr-val">30</span>ms</label>
+                    <input type="range" id="arr-range" min="10" max="100" value="30">
+                </div>
+                <div class="stats">
+                    <p>已送出攻擊: <span id="p-sent">0</span></p>
+                    <p>AI 送出: <span id="a-sent">0</span>
