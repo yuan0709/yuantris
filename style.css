@@ -1,30 +1,35 @@
-body { background: #121212; color: white; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; overflow: hidden; }
-.main-layout { display: flex; gap: 30px; align-items: flex-start; }
-.game-wrapper { display: flex; gap: 10px; align-items: flex-start; }
-.side-boxes { display: flex; flex-direction: column; gap: 10px; width: 100px; }
-.left { order: -1; }
-.right { order: 1; }
-.box { 
-    background: rgba(34, 34, 34, 0.9); padding: 10px; font-size: 14px; border-radius: 5px; 
-    text-align: center; border: 1px solid #444; color: #0dc2ff; box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-}
-.canvas-container { position: relative; display: flex; }
-.garbage-bar { width: 12px; height: 600px; background: #1a1a1a; margin-right: 5px; border: 1px solid #333; position: relative; }
-.garbage-fill { position: absolute; bottom: 0; width: 100%; background: #ff3e3e; transition: height 0.2s; }
-.garbage-fill.danger { background: #ff0000; box-shadow: 0 0 15px #ff0000; animation: blink 0.5s infinite; }
+/* 基礎樣式 */
+body { background: #121212; color: #eee; font-family: "Microsoft JhengHei", sans-serif; margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
+.app-layout { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.game-container { display: flex; gap: 20px; align-items: flex-start; }
+
+/* 側邊欄 */
+.side-panel { display: flex; flex-direction: column; gap: 8px; width: 110px; }
+.info-box { background: #222; padding: 10px; font-size: 12px; text-align: center; border-radius: 4px; border: 1px solid #444; }
+.info-box span { display: block; margin-bottom: 5px; color: #888; font-weight: bold; }
+
+/* 垃圾量表 */
+.garbage-bar-container { width: 14px; height: 600px; background: #111; position: relative; border: 1px solid #444; border-radius: 2px; }
+.garbage-fill { position: absolute; bottom: 0; width: 100%; background: linear-gradient(to top, #ff3b30, #ff9500); transition: height 0.2s; box-shadow: 0 0 10px rgba(255, 59, 48, 0.5); }
+
+/* 場地 */
+.main-board { position: relative; border: 3px solid #333; background: #000; }
+.board-label { text-align: center; font-size: 14px; background: #333; color: #0cf; padding: 4px; font-weight: bold; }
+canvas { display: block; }
+
+/* 設定彈窗 */
+.modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); }
+.modal-content { background: #222; margin: 5% auto; padding: 25px; width: 420px; border-radius: 12px; border: 1px solid #555; }
+.key-row { display: flex; justify-content: space-between; margin-bottom: 8px; align-items: center; padding: 5px 0; border-bottom: 1px solid #333; }
+.key-btn { background: #444; color: #0cf; padding: 6px 12px; border-radius: 4px; min-width: 90px; text-align: center; cursor: pointer; border: 1px solid #666; font-family: monospace; }
+.key-btn.waiting { background: #e67e22; color: #fff; animation: blink 0.8s infinite; }
 @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+.key-btn { font-size: 11px; min-width: 60px; margin-left: 5px; }
+.key-row span { flex: 1; }
+input[type="number"] { background: #333; color: #0cf; border: 1px solid #555; padding: 3px; border-radius: 4px; }
 
-canvas { 
-    border: 2px solid #444; background-color: #000;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-    background-size: 30px 30px;
-}
-
-.side-panel { width: 220px; background: #1e1e1e; padding: 20px; border-radius: 10px; border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-#start-btn { width: 100%; padding: 12px; margin-bottom: 20px; background: #0dc2ff; border: none; font-weight: bold; cursor: pointer; color: #000; border-radius: 5px; font-size: 16px; }
-#start-btn:hover { background: #00a0d4; transform: translateY(-2px); }
-.control-group { margin-bottom: 15px; font-size: 13px; color: #bbb; overflow: hidden; }
-input[type="number"] { width: 65px; background: #000; color: #fff; border: 1px solid #444; padding: 5px; border-radius: 3px; float: right; }
-.stats { background: #000; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #ff3e3e; font-size: 14px; line-height: 1.8; }
-.hint { font-size: 11px; color: #666; line-height: 1.6; margin-top: 20px; }
-h3 { color: #0dc2ff; margin: 0 0 10px 0; text-align: center; text-shadow: 0 0 10px rgba(13, 194, 255, 0.5); }
+/* 下方控制列 */
+.control-panel { background: #222; padding: 12px 30px; border-radius: 50px; border: 1px solid #444; display: flex; gap: 20px; align-items: center; }
+button { padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.2s; }
+.primary-btn { background: #2ecc71; color: white; }
+.secondary-btn { background: #555; color: white; }
