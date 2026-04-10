@@ -1,64 +1,54 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <title>Tetris Battle PRO - Ultimate</title>
+    <title>俄羅斯方塊：終極對決 Pro</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="game-container">
-        <div class="main-layout">
-            <div class="player-section">
-                <h3>PLAYER</h3>
-                <div class="game-wrapper">
-                    <div class="side-boxes left">
-                        <div class="box">HOLD<canvas id="hold-canvas" width="90" height="90"></canvas></div>
-                    </div>
-                    <div class="canvas-container">
-                        <div id="player-garbage-bar" class="garbage-bar"></div>
-                        <canvas id="tetris" width="300" height="600"></canvas>
-                    </div>
-                    <div class="side-boxes right">
-                        <div class="box">NEXT<canvas id="next-canvas" width="90" height="270"></canvas></div>
-                    </div>
-                </div>
-            </div>
-
+    <div class="app-layout">
+        <div class="game-container">
             <div class="side-panel">
-                <button id="start-btn">START GAME</button>
-                <div class="control-group">
-                    <label>AI 難度 (0-10):</label>
-                    <input type="number" id="ai-level" value="8" min="0" max="10">
-                </div>
-                <div class="control-group">
-                    <label>DAS (延遲 ms):</label>
-                    <input type="number" id="das-input" value="150">
-                </div>
-                <div class="control-group">
-                    <label>ARR (連移 ms):</label>
-                    <input type="number" id="arr-input" value="30">
-                </div>
-                <div class="stats">
-                    <p>已送出攻擊: <span id="p-sent">0</span></p>
-                    <p>AI 送出: <span id="a-sent">0</span></p>
-                </div>
-                <div class="hint">
-                    移動: 方向鍵 / WASD<br>
-                    旋轉: ↑ / W / X<br>
-                    硬降: 空白鍵<br>
-                    暫存: C / Shift
-                </div>
+                <div class="info-box"><span>HOLD</span><canvas id="hold-canvas" width="120" height="120"></canvas></div>
+                <div class="garbage-bar-container"><div id="player-garbage-bar" class="garbage-fill"></div></div>
             </div>
+            <div class="main-board">
+                <div class="board-label">PLAYER</div>
+                <canvas id="tetris" width="300" height="600"></canvas>
+            </div>
+            <div class="side-panel">
+                <div class="info-box" style="height: 480px;"><span>NEXT 5</span><canvas id="next-canvas" width="120" height="450"></canvas></div>
+            </div>
+            <div class="main-board">
+                <div class="ai-overlay-settings" style="display:flex; justify-content:space-around; background:#2c3e50; padding:5px; font-size:11px;">
+                    Lvl: <input type="number" id="ai-level" value="5" min="1" max="10" style="width:35px">
+                    PPS: <input type="number" id="ai-pps" value="2.5" step="0.1" style="width:40px">
+                    <label><input type="checkbox" id="expert-mode"> Expert</label>
+                </div>
+                <div class="board-label">BOT AI</div>
+                <canvas id="ai-tetris" width="300" height="600"></canvas>
+            </div>
+            <div class="side-panel">
+                <div style="height: 25px;"></div>
+                <div class="garbage-bar-container"><div id="ai-garbage-bar" class="garbage-fill"></div></div>
+            </div>
+        </div>
+        <div class="control-panel">
+            <button id="start-btn" class="primary-btn">START GAME</button>
+            <button id="open-settings" class="secondary-btn">按鍵 / 手感設定</button>
+            <div style="font-size: 14px; color: #0cf;">YOU: <span id="p-sent">0</span> | AI: <span id="a-sent">0</span></div>
+        </div>
+    </div>
 
-            <div class="player-section">
-                <h3>AI BOT</h3>
-                <div class="game-wrapper">
-                    <div class="canvas-container">
-                        <div id="ai-garbage-bar" class="garbage-bar"></div>
-                        <canvas id="ai-tetris" width="300" height="600"></canvas>
-                    </div>
-                </div>
-            </div>
+    <div id="settings-modal" class="modal">
+        <div class="modal-content" style="width: 480px;">
+            <h3 style="margin-top:0; color:#0cf;">按鍵與手感設定 (點擊按鈕設定雙鍵位)</h3>
+            <div id="key-config-container" style="max-height: 300px; overflow-y: auto;"></div>
+            <hr style="border:0; border-top:1px solid #444; margin:15px 0;">
+            <div class="key-row"><span>DAS (啟動延遲 ms)</span><input type="number" id="das-input" value="150"></div>
+            <div class="key-row"><span>ARR (移動速度 ms)</span><input type="number" id="arr-input" value="30"></div>
+            <div class="key-row"><span>軟降速度 (每格耗時 ms)</span><input type="number" id="sd-speed-input" value="30" min="0"></div>
+            <button id="save-settings" class="primary-btn" style="width:100%; margin-top:15px;">儲存並關閉</button>
         </div>
     </div>
     <script src="script.js"></script>
